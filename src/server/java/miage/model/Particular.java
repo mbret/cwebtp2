@@ -1,0 +1,35 @@
+package miage.model;
+
+/**
+ * Created by Maxime on 12/30/2014.
+ */
+public class Particular extends User{
+
+    private String name;
+    private String firstname;
+    private String birthday;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+}

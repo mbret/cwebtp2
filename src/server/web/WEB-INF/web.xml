@@ -6,13 +6,24 @@
 
     <display-name>Struts 2 - CWEB - MIAGE</display-name>
 
+    <welcome-file-list>
+        <welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
     </filter>
 
+    <!-- Required mapping for struts 2 framework -->
     <filter-mapping>
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/pages/404.jsp</location>
+    </error-page>
+
 </web-app>

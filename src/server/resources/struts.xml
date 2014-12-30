@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+        <!-- Constants -->
+        <constant name="struts.devMode" value="true"/>
+
+        <!-- Configuration for the default package. -->
+        <package name="default" extends="struts-default" namespace="/">
+
+                <action name="home"
+                        class="miage.action.IndexAction"
+                        method="execute">
+                        <result name="success">/WEB-INF/pages/index.jsp</result>
+                </action>
+
+                <action name="signin"
+                        class="miage.action.IndexAction"
+                        method="execute">
+                        <result name="success">/signin.jsp</result>
+                </action>
+
+                <action name="signup"
+                        class="miage.action.SignupAction"
+                        method="display">
+                        <result name="success">/WEB-INF/pages/signup.jsp</result>
+                </action>
+
+                <action name="validateSignup"
+                        class="miage.action.SignupAction"
+                        method="execute">
+                        <result name="input">/WEB-INF/pages/signup.jsp</result>
+                        <result name="success" type="redirectAction">home</result>
+                </action>
+
+
+                <!-- Add additional actions here -->
+        </package>
+
+</struts>
