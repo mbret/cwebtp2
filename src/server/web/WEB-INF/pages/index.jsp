@@ -16,6 +16,9 @@
     <ul>
       <li><a href="directories">See directories</a></li>
       <li><a href="signup">Sign up</a></li>
+      <li><a href="auth/login">Login</a></li>
+      <li><a href="logout">Logout</a></li>
+      <li><a href="users">See users</a></li>
     </ul>
   </nav>
 

@@ -1,8 +1,16 @@
 package miage.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
 /**
  * Created by Maxime on 12/30/2014.
  */
+@Entity
+@Table(name="particulier")
+@PrimaryKeyJoinColumn(name="id")
 public class Particular extends User{
 
     private String name;

@@ -25,5 +25,9 @@
         <error-code>404</error-code>
         <location>/pages/404.jsp</location>
     </error-page>
+    
+    <listener>
+        <listener-class>miage.util.HibernateListener</listener-class>
+    </listener>
 
 </web-app>
