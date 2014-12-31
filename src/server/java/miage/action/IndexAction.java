@@ -15,8 +15,10 @@ public class IndexAction extends Abstract{
     private static final Logger LOG = LoggerFactory.getLogger(IndexAction.class);
 
     @Actions({
+
             @Action("home"),
             @Action("index")
+            
     })
     public String execute() throws Exception{
 
