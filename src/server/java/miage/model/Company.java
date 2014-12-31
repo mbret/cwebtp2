@@ -20,6 +20,11 @@ public class Company extends User{
         super();
     }
 
+    public Company(User user, String corporateName) {
+        super( user.getEmail(), user.getPassword() );
+        this.corporateName = corporateName;
+    }
+
     public String getCorporateName() {
         return corporateName;
     }

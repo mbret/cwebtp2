@@ -1,21 +1,36 @@
 package miage.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Maxime on 12/30/2014.
  */
 @Entity
-@Table(name="particulier")
+@Table(name="particular")
 @PrimaryKeyJoinColumn(name="id")
 public class Particular extends User{
 
+    @Column(name="name", nullable = false)
     private String name;
+
+    @Column(name="firstname", nullable = false)
     private String firstname;
-    private String birthday;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name="birthday", nullable = true)
+    private Date birthday;
+
+    public Particular() {
+        super();
+    }
+
+    public Particular(User user, String name, String firstname, Date birthday) {
+        super( user.getEmail(), user.getPassword() );
+        this.name = name;
+        this.firstname = firstname;
+        this.birthday = birthday;
+    }
 
     public String getName() {
         return name;
@@ -33,11 +48,11 @@ public class Particular extends User{
         this.firstname = firstname;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 }

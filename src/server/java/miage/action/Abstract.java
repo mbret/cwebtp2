@@ -3,6 +3,7 @@ package miage.action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.annotations.After;
 import com.opensymphony.xwork2.interceptor.annotations.Before;
+import org.apache.struts2.convention.annotation.ResultPath;
 
 /**
  * Created by Maxime on 12/30/2014.
@@ -12,6 +13,7 @@ import com.opensymphony.xwork2.interceptor.annotations.Before;
  *
  * Some example of annotation stackoverflow.com/questions/14805027/struts2-passing-action-member-variable-as-parameter-using-annotation
  */
+@ResultPath("/WEB-INF/pages")
 public class Abstract extends ActionSupport {
 
     @Before

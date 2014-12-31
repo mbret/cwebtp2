@@ -1,10 +1,11 @@
 package miage.action.Auth;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 import miage.bean.AuthUser;
 import miage.dao.AuthDAO;
-import org.apache.struts2.convention.annotation.Namespace;
+import miage.util.DatabaseInitializerListener;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -16,13 +17,16 @@ import java.util.Map;
  * - This action implement model driven interface, that way it transfer the form data into object automatically
  * - SessionAware interface allow us to use session with this action
  */
+@Validations
 public class LoginAction extends Abstract implements ModelDriven<AuthUser>, SessionAware{
 
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(DatabaseInitializerListener.class);
+
     // For ModelDriven
-    private AuthUser authUser = new AuthUser();
+    private AuthUser beanAuthUser = new AuthUser();
     @Override
     public AuthUser getModel() {
-        return authUser;
+        return beanAuthUser;
     }
 
     // For SessionAware
@@ -30,6 +34,11 @@ public class LoginAction extends Abstract implements ModelDriven<AuthUser>, Sess
     @Override
     public void setSession(Map<String, Object> map) {
         this.session = map;
+    }
+
+    @VisitorFieldValidator(message="Error on form: ")
+    public miage.bean.AuthUser getUser(){
+        return beanAuthUser;
     }
 
     AuthDAO dao = new AuthDAO();
@@ -41,7 +50,10 @@ public class LoginAction extends Abstract implements ModelDriven<AuthUser>, Sess
     @Action(
             value="login",
             results = {
-                    @Result(name="success", location="/WEB-INF/pages/login.jsp")
+                    @Result(name="success", location="/WEB-INF/pages/login.jsp"),
+                    @Result(name="error", type = "redirectAction", params = {
+                            "namespace", "/", "actionName", "home", "message", "already logged"
+                    })
             }
     )
     @SkipValidation
@@ -49,7 +61,8 @@ public class LoginAction extends Abstract implements ModelDriven<AuthUser>, Sess
 
         // Check if already auth
         if(this.session.containsKey("user")){
-            return SUCCESS;
+            logger.debug("User already logged!");
+            return ERROR;
         }
 
         return SUCCESS;
@@ -73,17 +86,23 @@ public class LoginAction extends Abstract implements ModelDriven<AuthUser>, Sess
     )
     public String execute() throws Exception{
 
-//        miage.model.User user = this.dao.checkAuth( authUser );
-//
-//        if( user == null ){
-//            this.addActionError("Credentials invalids");
-//            return ERROR;
-//        }
-//        else{
-//            // Save user to session
-//            this.session.put("user", "oneID");
-            return SUCCESS;
-//        }
+        try {
+            miage.model.User user = dao.checkAuth( beanAuthUser );
+            if( user == null ){
+                this.addActionError("Credentials invalids");
+                return ERROR;
+            }
+            else{
+                this.session.put("user", user.getId());
+                this.addActionMessage("User saved successful!");
+                return SUCCESS;
+            }
+        } catch (Exception e) {
+            this.addActionError("Could not save User: " + e.getMessage());
+            e.printStackTrace();
+            return ERROR;
+        }
+
     }
 
 

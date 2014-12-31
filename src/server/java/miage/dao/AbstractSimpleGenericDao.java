@@ -6,19 +6,27 @@ import java.util.List;
 
 import miage.util.HibernateUtil;
 import org.hibernate.HibernateException;
+import org.hibernate.Transaction;
 
 public class AbstractSimpleGenericDao<C,I extends Serializable> {
 
-    Class<C> entityClass;
+    public static boolean autoTransaction = true;
 
+    Class<C> entityClass;
 
     {
         entityClass = (Class<C>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
+    public Transaction getTransaction(){
+        return HibernateUtil.currentSession().getTransaction();
+    }
+
     public List<C> getAll() {
         try {
-            return HibernateUtil.currentSession().createCriteria(entityClass).list();
+            List<C> result;
+            result = HibernateUtil.currentSession().createCriteria(entityClass).list();
+            return result;
         } catch (HibernateException e) {
             e.printStackTrace();
             throw e;
@@ -36,9 +44,7 @@ public class AbstractSimpleGenericDao<C,I extends Serializable> {
 
     public void save(C object) {
         try {
-            HibernateUtil.currentSession().beginTransaction();
             HibernateUtil.currentSession().saveOrUpdate(object);
-            HibernateUtil.currentSession().getTransaction().commit();
         } catch (HibernateException e) {
             HibernateUtil.currentSession().getTransaction().rollback();
             e.printStackTrace();
@@ -49,9 +55,7 @@ public class AbstractSimpleGenericDao<C,I extends Serializable> {
     public void delete(I id) {
         try {
             C actual = get(id);
-            HibernateUtil.currentSession().beginTransaction();
             HibernateUtil.currentSession().delete(actual);
-            HibernateUtil.currentSession().getTransaction().commit();
         } catch (HibernateException e) {
             HibernateUtil.currentSession().getTransaction().rollback();
             e.printStackTrace();

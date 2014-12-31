@@ -15,6 +15,11 @@
 
         <!-- Mapping files -->
         <mapping class="miage.model.User" />
+        <mapping class="miage.model.Particular" />
+        <mapping class="miage.model.Company" />
+        <mapping class="miage.model.Directory" />
+        <mapping class="miage.model.Message" />
+
     </session-factory>
 
 </hibernate-configuration>

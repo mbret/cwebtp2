@@ -1,22 +1,26 @@
 package miage.util;
 
 import org.hibernate.*;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 public class HibernateUtil {
-    public static final SessionFactory sessionFactory;
 
-    static {
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static ServiceRegistry serviceRegistry;
+
+    private static SessionFactory buildSessionFactory() {
         try {
-            // Création de la SessionFactory � partir de hibernate.cfg.xml
-//            sessionFactory = new Configuration().configure()
-//                    .buildSessionFactory();
-            // Create the SessionFactory from hibernate.cfg.xml
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            Configuration configuration  = new Configuration().configure();
+            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                    configuration.getProperties()
+            ).build();
+            return configuration.buildSessionFactory( serviceRegistry );
         } catch (HibernateException ex) {
 
-            System.out.println("Initial SessionFactory creation failed." + ex);
-            throw new RuntimeException("Problème de configuration : " + ex.getMessage() );
+            throw new RuntimeException("Problème de configuration : " + ex );
         }
     }
 

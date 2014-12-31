@@ -8,6 +8,10 @@ import javax.persistence.Table;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -24,13 +28,34 @@ public class User implements Serializable{
     @Column(name="id")
     private Long id;
 
-    private String password;
-
     @Column(name="email", unique = true, nullable = false)
     private String email;
 
-    public User() {
+    private String password;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "to_user")
+    private List<Message> messagesReceived = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "from_user")
+    private List<Message> messagesSent = new ArrayList();
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Directory> directories = new HashSet<Directory>();
+
+    public User() { }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String email, String password, List<Message> messagesReceived, List<Message> messagesSent) {
+        this.email = email;
+        this.password = password;
+        this.messagesReceived = messagesReceived;
+        this.messagesSent = messagesSent;
     }
 
     public User(miage.bean.User userBean ){
@@ -38,7 +63,6 @@ public class User implements Serializable{
         this.password = userBean.getPassword();
         this.email = userBean.getPassword();
     }
-
 
     public Long getId() {
         return id;
@@ -62,6 +86,26 @@ public class User implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Message> getMessagesReceived() {
+        return messagesReceived;
+    }
+
+    public void setMessagesReceived(List<Message> messagesReceived) {
+        this.messagesReceived = messagesReceived;
+    }
+
+    public List<Message> getMessagesSent() {
+        return messagesSent;
+    }
+
+    public void setMessagesSent(List<Message> messagesSent) {
+        this.messagesSent = messagesSent;
+    }
+
+    public Set<Directory> getDirectories() {
+        return directories;
     }
 
     @Override

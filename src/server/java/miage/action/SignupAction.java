@@ -27,7 +27,7 @@ public class SignupAction extends ActionSupport implements ModelDriven<miage.bea
 
     UserDAO dao = new UserDAO();
 
-    @VisitorFieldValidator(message="Error during signup: ")
+    @VisitorFieldValidator(message="Error on form: ")
     public User getUser(){
         return beanUser;
     }
