@@ -1,9 +1,6 @@
 package miage.bean;
 
-import com.opensymphony.xwork2.validator.annotations.EmailValidator;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.Validations;
-import com.opensymphony.xwork2.validator.annotations.ValidatorType;
+import com.opensymphony.xwork2.validator.annotations.*;
 import miage.model.ModelInterface;
 import miage.model.User;
 
@@ -21,6 +18,7 @@ public class UserBean extends Abstract<User>{
     private String email;
 
     public UserBean() {
+
     }
 
     public UserBean(Long id, String password, String email) {
@@ -37,7 +35,12 @@ public class UserBean extends Abstract<User>{
         this.id = id;
     }
 
+    /**
+     * Password matching expression. Password must be at least 8 characters, no more than 16 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit.
+     * @return
+     */
     @RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "password", message="Supply password")
+    @RegexFieldValidator( regexExpression = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$", message = "Password invalid")
     public String getPassword() {
         return password;
     }

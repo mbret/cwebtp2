@@ -8,5 +8,23 @@
 
         <!-- Constants -->
         <!--<constant name="struts.devMode" value="true"/>-->
+        <!--<constant name="struts.convention.result.path" value="/WEB-INF/jsp/" />-->
+        <!--<constant name="struts.action.extension" value="action," />-->
+        <!--<constant name="struts.custom.i18n.resources" value="test" />-->
+        <!--<constant name="struts.convention.default.parent.package" value="default"/>-->
+
+
+        <package name="default" namespace="/" extends="struts-default">
+
+                <interceptors>
+                        <interceptor name="authenticationInterceptor"
+                                     class="miage.interceptor.AuthenticationInterceptor"></interceptor>
+                        <interceptor-stack name="authStack">
+                                <interceptor-ref name="authenticationInterceptor"></interceptor-ref>
+                                <interceptor-ref name="defaultStack"></interceptor-ref>
+                        </interceptor-stack>
+                </interceptors>
+
+        </package>
 
 </struts>

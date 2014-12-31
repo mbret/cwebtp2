@@ -7,6 +7,7 @@ import miage.bean.AuthUserBean;
 import miage.dao.AuthDAO;
 import miage.model.User;
 import miage.util.DatabaseInitializerListener;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -18,6 +19,7 @@ import java.util.Map;
  * - This action implement model driven interface, that way it transfer the form data into object automatically
  * - SessionAware interface allow us to use session with this action
  */
+@InterceptorRef("defaultStack")
 @Validations
 public class LoginAction extends Abstract implements ModelDriven<AuthUserBean>, SessionAware{
 
@@ -53,7 +55,7 @@ public class LoginAction extends Abstract implements ModelDriven<AuthUserBean>, 
             results = {
                     @Result(name="success", location="/WEB-INF/pages/login.jsp"),
                     @Result(name="error", type = "redirectAction", params = {
-                            "namespace", "/", "actionName", "home", "message", "already logged"
+                            "namespace", "/", "actionName", "home", /*"message", "already logged"*/
                     })
             }
     )

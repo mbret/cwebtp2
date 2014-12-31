@@ -1,4 +1,4 @@
-package miage.action.Auth;
+package miage.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -9,6 +9,7 @@ import miage.dao.UserDAO;
 import miage.model.ModelFactory;
 import miage.model.User;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
@@ -20,7 +21,7 @@ import java.util.Map;
  * This action implement model driven interface, that way it transfer the form data into object automatically
  */
 @Validations
-public class SignupAction extends ActionSupport implements ModelDriven<UserBean>, SessionAware{
+public class SignupAction extends Abstract implements ModelDriven<UserBean>, SessionAware{
 
     // For ModelDriven
     private UserBean beanUser = new UserBean();

@@ -29,4 +29,9 @@
         <listener-class>miage.util.DatabaseInitializerListener</listener-class>
     </listener>
 
+    <!-- Session of 1 minute -->
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
 </web-app>
