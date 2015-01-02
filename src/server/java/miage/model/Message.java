@@ -6,6 +6,7 @@
 package miage.model;
 
 import miage.bean.MessageBean;
+import miage.bean.UserBean;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -84,7 +85,14 @@ public class Message extends Abstract<MessageBean> implements Serializable {
     }
 
     @Override
-    public void loadFromBean(MessageBean bean) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public void loadFromBean(MessageBean bean) throws Exception {
+        this.object = bean.getObject();
+        this.content = bean.getContent();
+        if( bean.getFrom() instanceof UserBean ){
+            this.to = ModelFactory.create(User.class, bean.getTo());
+        }
+        if( bean.getFrom() instanceof UserBean ){
+            this.from = ModelFactory.create(User.class, bean.getFrom());
+        }
     }
 }

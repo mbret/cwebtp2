@@ -28,7 +28,7 @@ import org.apache.struts2.convention.annotation.*;
                "namespace", "/auth", "actionName", "login", "message", "already logged"
        })
 })
-// Here we defin the global path for result
+// Here we define the global path for result
 // In action we can use "signup.jsp" instead of "/WEB-INF/pages/signup"
 @ResultPath("/WEB-INF/pages")
 public class Abstract extends ActionSupport {

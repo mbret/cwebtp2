@@ -6,5 +6,5 @@ import miage.bean.BeanInterface;
  */
 public interface ModelInterface<T extends BeanInterface> {
 
-    public abstract void loadFromBean( T bean );
+    public abstract void loadFromBean( T bean ) throws Exception;
 }

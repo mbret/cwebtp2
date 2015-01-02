@@ -1,7 +1,9 @@
 package miage.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
+import miage.Global;
 import miage.interceptor.AuthenticatedUserAware;
 import miage.model.User;
 import miage.util.DatabaseInitializerListener;
@@ -10,6 +12,7 @@ import org.apache.struts2.convention.annotation.*;
 /**
  * Created by Maxime on 12/29/2014.
  */
+@InterceptorRef("defaultStack") // ne need to be auth to access index
 @Result(name="success", location="index.jsp")
 public class IndexAction extends Abstract implements AuthenticatedUserAware{
 
@@ -28,6 +31,9 @@ public class IndexAction extends Abstract implements AuthenticatedUserAware{
             @Action("index")
     })
     public String execute() throws Exception{
+
+        // Here I get global application variable
+        boolean aGlobalVar = Global.AUTO_AUTH; // ...
 
         logger.debug("IndexAction: home action called");
         logger.debug(this.authenticatedUser);

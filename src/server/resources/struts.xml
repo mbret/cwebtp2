@@ -17,12 +17,20 @@
         <package name="default" namespace="/" extends="struts-default">
 
                 <interceptors>
-                        <interceptor name="authenticationInterceptor"
-                                     class="miage.interceptor.AuthenticationInterceptor"></interceptor>
+
+                        <!-- New interceptor for auth -->
+                        <interceptor
+                                name="authenticationInterceptor"
+                                class="miage.interceptor.AuthenticationInterceptor">
+                        </interceptor>
+
+
                         <interceptor-stack name="authStack">
                                 <interceptor-ref name="authenticationInterceptor"></interceptor-ref>
                                 <interceptor-ref name="defaultStack"></interceptor-ref>
                         </interceptor-stack>
+
+
                 </interceptors>
 
         </package>

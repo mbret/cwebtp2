@@ -3,6 +3,7 @@ package miage.interceptor;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.Interceptor;
+import miage.Global;
 import miage.dao.UserDAO;
 import miage.model.ModelFactory;
 import miage.model.User;
@@ -38,7 +39,13 @@ public class AuthenticationInterceptor implements Interceptor{
         System.out.println("inside auth interceptor");
         Map<String, Object> sessionAttributes = actionInvocation.getInvocationContext().getSession();
 
+        // For dev only
+        if(Global.AUTO_AUTH){
+            sessionAttributes.put("user", userDAO.get( new Long(1) ).getId() );
+        }
+
         Long userId = (Long)sessionAttributes.get("user");
+
 
         if( userId == null ){
 
@@ -55,4 +62,6 @@ public class AuthenticationInterceptor implements Interceptor{
             return actionInvocation.invoke();
         }
     }
+
+
 }

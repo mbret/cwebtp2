@@ -9,6 +9,7 @@ import miage.dao.UserDAO;
 import miage.model.ModelFactory;
 import miage.model.User;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,6 +21,7 @@ import java.util.Map;
 /**
  * This action implement model driven interface, that way it transfer the form data into object automatically
  */
+@InterceptorRef("defaultStack")
 @Validations
 public class SignupAction extends Abstract implements ModelDriven<UserBean>, SessionAware{
 

@@ -44,7 +44,13 @@ public class AbstractSimpleGenericDao<C,I extends Serializable> {
 
     public void save(C object) {
         try {
+            if( autoTransaction ){
+                this.getTransaction().begin();
+            }
             HibernateUtil.currentSession().saveOrUpdate(object);
+            if( autoTransaction ){
+                this.getTransaction().commit();
+            }
         } catch (HibernateException e) {
             HibernateUtil.currentSession().getTransaction().rollback();
             e.printStackTrace();
@@ -54,12 +60,20 @@ public class AbstractSimpleGenericDao<C,I extends Serializable> {
 
     public void delete(I id) {
         try {
+            if( autoTransaction ){
+                this.getTransaction().begin();
+            }
             C actual = get(id);
             HibernateUtil.currentSession().delete(actual);
+            if( autoTransaction ){
+                this.getTransaction().commit();
+            }
         } catch (HibernateException e) {
             HibernateUtil.currentSession().getTransaction().rollback();
             e.printStackTrace();
             throw e;
         }
     }
+
+
 }

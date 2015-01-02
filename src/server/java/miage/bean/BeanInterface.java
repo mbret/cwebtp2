@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public abstract interface BeanInterface<T extends ModelInterface> {
 
-    public abstract void loadFromModel( T model );
+    public abstract void loadFromModel( T model ) throws Exception;
 
 
 }
