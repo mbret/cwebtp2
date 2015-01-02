@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @InterceptorRef("commonStack")
 @Validations
-public class LoginAction extends Abstract implements ModelDriven<AuthUserBean>, SessionAware{
+public class LoginAction extends AbstractAction implements ModelDriven<AuthUserBean>, SessionAware{
 
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(DatabaseInitializerListener.class);
 

@@ -64,5 +64,7 @@ public class DirectoryBean extends Abstract<Directory>{
     public void loadFromModel(Directory model) {
         this.id = model.getId();
         this.name = model.getName();
+        this.users = model.getUsers();
+        this.nbUsers = this.users.size();
     }
 }
