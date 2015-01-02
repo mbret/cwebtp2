@@ -19,7 +19,7 @@ import java.util.Map;
  * - This action implement model driven interface, that way it transfer the form data into object automatically
  * - SessionAware interface allow us to use session with this action
  */
-@InterceptorRef("defaultStack")
+@InterceptorRef("commonStack")
 @Validations
 public class LoginAction extends Abstract implements ModelDriven<AuthUserBean>, SessionAware{
 

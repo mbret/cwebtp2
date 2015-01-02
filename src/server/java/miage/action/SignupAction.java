@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * This action implement model driven interface, that way it transfer the form data into object automatically
  */
-@InterceptorRef("defaultStack")
+@InterceptorRef("commonStack")
 @Validations
 public class SignupAction extends Abstract implements ModelDriven<UserBean>, SessionAware{
 

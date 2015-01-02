@@ -12,12 +12,12 @@ import org.apache.struts2.convention.annotation.*;
 /**
  * Created by Maxime on 12/29/2014.
  */
-@InterceptorRef("defaultStack") // ne need to be auth to access index
+@InterceptorRef("commonStack") // ne need to be auth to access index
 @Result(name="success", location="index.jsp")
 public class IndexAction extends Abstract implements AuthenticatedUserAware{
 
     // For AuthenticatedUserAware
-    User authenticatedUser = new User();
+    private User authenticatedUser;
     @Override
     public void setUser(User authenticatedUser) {
         this.authenticatedUser = authenticatedUser;
@@ -38,8 +38,11 @@ public class IndexAction extends Abstract implements AuthenticatedUserAware{
         logger.debug("IndexAction: home action called");
         logger.debug(this.authenticatedUser);
 
+
         return SUCCESS;
     }
 
-
+    public User getAuthenticatedUser() {
+        return authenticatedUser;
+    }
 }

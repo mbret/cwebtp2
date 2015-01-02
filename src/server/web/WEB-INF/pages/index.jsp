@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
 
   Form tags: http://struts.apache.org/docs/struts-2-form-tags.html
@@ -14,6 +15,7 @@
 
   <h1>Index</h1>
   <h2>Your are seeing index page, you do not need to be authenticated here</h2>
+  <h3>You are authenticated under: <s:property value="authenticatedUser" /></h3>
   <nav>
     <ul>
       <li><a href="directories/list">See directories</a></li>

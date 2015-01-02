@@ -18,16 +18,25 @@
 
                 <interceptors>
 
+                        <interceptor
+                                name="commonInterceptor"
+                                class="miage.interceptor.CommonInterceptor">
+                        </interceptor>
+
                         <!-- New interceptor for auth -->
                         <interceptor
                                 name="authenticationInterceptor"
                                 class="miage.interceptor.AuthenticationInterceptor">
                         </interceptor>
 
+                        <interceptor-stack name="commonStack">
+                                <interceptor-ref name="commonInterceptor"></interceptor-ref>
+                                <interceptor-ref name="defaultStack"></interceptor-ref>
+                        </interceptor-stack>
 
                         <interceptor-stack name="authStack">
                                 <interceptor-ref name="authenticationInterceptor"></interceptor-ref>
-                                <interceptor-ref name="defaultStack"></interceptor-ref>
+                                <interceptor-ref name="commonStack"></interceptor-ref>
                         </interceptor-stack>
 
 
