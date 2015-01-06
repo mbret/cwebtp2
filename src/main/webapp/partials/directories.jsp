@@ -7,13 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
 
-<h1>Struts 2 Iterator tag example</h1>
+<h1 class="page-header">Directories</h1>
 
 <h3>Directories</h3>
 <ul>
@@ -61,6 +56,3 @@
   </ul>
 </s:subset>
 
-
-</body>
-</html>

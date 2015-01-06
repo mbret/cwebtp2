@@ -23,14 +23,35 @@
         <put-attribute name="body"   value="/partials/index.jsp"/>
     </definition>
 
+    <definition name="/users.tiles" extends="baseLayout">
+        <put-attribute name="title"  value="Users"/>
+        <put-attribute name="body"   value="/partials/users.jsp"/>
+    </definition>
+
+    <definition name="/messages-add.tiles" extends="baseLayout">
+        <put-attribute name="title"  value="Send a message"/>
+        <put-attribute name="body"   value="/partials/messages-add.jsp"/>
+    </definition>
+
+    <definition name="/messages-list.tiles" extends="baseLayout">
+        <put-attribute name="title"  value="Messages"/>
+        <put-attribute name="body"   value="/partials/messages-list.jsp"/>
+    </definition>
+
+    <definition name="/directories.tiles" extends="baseLayout">
+        <put-attribute name="title"  value="Directories"/>
+        <put-attribute name="body"   value="/partials/directories.jsp"/>
+    </definition>
+
     <definition name="/login.tiles" extends="blankLayout">
-        <put-attribute name="title"  value="Index"/>
+        <put-attribute name="title"  value="Login"/>
         <put-attribute name="body"   value="/partials/login.jsp"/>
     </definition>
 
     <definition name="/signup.tiles" extends="blankLayout">
-        <put-attribute name="title"  value="Index"/>
+        <put-attribute name="title"  value="Sign up"/>
         <put-attribute name="body"   value="/partials/signup.jsp"/>
     </definition>
+
 
 </tiles-definitions>

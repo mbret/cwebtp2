@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Maxime on 12/31/2014.
  */
-@Result(name="none", location="/WEB-INF/pages/messages-list.jsp")
+@Result(name="none", location="/messages-list.tiles", type="tiles")
 public class ListAction extends AbstractAction implements AuthenticatedUserAware{
 
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ListAction.class);

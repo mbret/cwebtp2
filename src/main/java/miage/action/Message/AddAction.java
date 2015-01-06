@@ -83,7 +83,7 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
     @Action(
             value="form",
             results = {
-                    @Result(name="none", location="/WEB-INF/pages/messages-add.jsp"),
+                    @Result(name="none", location="/messages-add.tiles", type="tiles"),
                     @Result(name="error", type = "redirectAction", params = {
                             "namespace", "/", "actionName", "home"
                     })
@@ -103,8 +103,8 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
     @Action(
             value = "send",
             results = {
-                    @Result(name="error", location="/WEB-INF/pages/messages-add.jsp"),
-                    @Result(name="input", location="/WEB-INF/pages/messages-add.jsp"),
+                    @Result(name="error", location="/messages-add.tiles", type="tiles"),
+                    @Result(name="input", location="/messages-add.tiles", type="tiles"),
                     @Result(name="success", type = "redirectAction", params = {
                             "namespace", "/", "actionName", "home", "message", ""
                     })
