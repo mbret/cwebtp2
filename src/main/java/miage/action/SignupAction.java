@@ -53,7 +53,7 @@ public class SignupAction extends Abstract implements ModelDriven<UserBean>, Ses
     @Action(
             value="signup",
             results = {
-                    @Result(name="success", location="/WEB-INF/pages/signup.jsp"),
+                    @Result(name="success", location="/signup.tiles", type="tiles"),
             }
     )
     @SkipValidation
@@ -69,8 +69,8 @@ public class SignupAction extends Abstract implements ModelDriven<UserBean>, Ses
     @Action(
             value = "validateSignup",
             results = {
-                    @Result(name="error", location="/WEB-INF/pages/signup.jsp"),
-                    @Result(name="input", location="/WEB-INF/pages/signup.jsp"),
+                    @Result(name="error", location="/signup.tiles", type="tiles"),
+                    @Result(name="input", location="/signup.tiles", type="tiles"),
                     @Result(name="success", type = "redirectAction", params = {
                             "namespace", "/", "actionName", "home", "message", ""
                     })

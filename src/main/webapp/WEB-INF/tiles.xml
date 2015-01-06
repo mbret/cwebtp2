@@ -8,13 +8,29 @@
 
     <definition name="baseLayout" template="/layout.jsp">
         <put-attribute name="title"  value="Template"/>
-        <put-attribute name="menu"   value="/menu.jsp"/>
-        <put-attribute name="footer"   value="/footer.jsp"/>
+        <!--<put-attribute name="menu"   value="/menu.jsp"/>-->
+        <!--<put-attribute name="footer"   value="/footer.jsp"/>-->
+    </definition>
+
+    <definition name="blankLayout" template="/layout_blank.jsp">
+        <put-attribute name="title"  value="Template"/>
+        <!--<put-attribute name="menu"   value="/menu.jsp"/>-->
+        <!--<put-attribute name="footer"   value="/footer.jsp"/>-->
     </definition>
 
     <definition name="/index.tiles" extends="baseLayout">
         <put-attribute name="title"  value="Index"/>
         <put-attribute name="body"   value="/partials/index.jsp"/>
+    </definition>
+
+    <definition name="/login.tiles" extends="blankLayout">
+        <put-attribute name="title"  value="Index"/>
+        <put-attribute name="body"   value="/partials/login.jsp"/>
+    </definition>
+
+    <definition name="/signup.tiles" extends="blankLayout">
+        <put-attribute name="title"  value="Index"/>
+        <put-attribute name="body"   value="/partials/signup.jsp"/>
     </definition>
 
 </tiles-definitions>

@@ -11,7 +11,7 @@ import org.apache.struts2.convention.annotation.Result;
 /**
  * Created by Maxime on 12/29/2014.
  */
-@InterceptorRef("commonStack") // ne need to be auth to access index
+//@InterceptorRef("commonStack") // ne need to be auth to access index
 @Result(name="success", location="/index.tiles", type="tiles")
 public class IndexAction extends Abstract implements AuthenticatedUserAware{
 

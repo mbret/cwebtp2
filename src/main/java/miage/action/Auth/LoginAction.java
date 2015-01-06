@@ -53,7 +53,7 @@ public class LoginAction extends AbstractAction implements ModelDriven<AuthUserB
     @Action(
             value="login",
             results = {
-                    @Result(name="success", location="/WEB-INF/pages/login.jsp"),
+                    @Result(name="success", location="/login.tiles", type="tiles"),
                     @Result(name="error", type = "redirectAction", params = {
                             "namespace", "/", "actionName", "home", /*"message", "already logged"*/
                     })
@@ -80,8 +80,8 @@ public class LoginAction extends AbstractAction implements ModelDriven<AuthUserB
     @Action(
             value = "validateLogin",
             results = {
-                    @Result(name="error", location="/WEB-INF/pages/login.jsp"),
-                    @Result(name="input", location="/WEB-INF/pages/login.jsp"),
+                    @Result(name="error", location="/login.tiles", type="tiles"),
+                    @Result(name="input", location="/login.tiles", type="tiles"),
                     @Result(name="success", type = "redirectAction", params = {
                             "namespace", "/", "actionName", "home", "message", ""
                     })
