@@ -20,6 +20,17 @@
     <s:password name="password" cssClass="input form-control" label="Password"/>
     <s:textfield name="email" cssClass="input form-control" label="email"/>
     <%--<s:textfield name="firstname" cssClass="input"/>--%>
+
+    <s:radio label="Type" name="type" list="types"  />
+
+    <%-- Corporate --%>
+    <s:textfield name="corporateName" cssClass="input form-control" label="Corporate name"/>
+
+    <%-- Particular --%>
+    </hr>
+    <s:textfield name="firstName" cssClass="input form-control" label="First name"/>
+    <s:textfield name="lastName" cssClass="input form-control" label="Last name"/>
+
     <s:submit value="Signup" cssClass="btn btn-lg btn-primary btn-block"/>
   </s:form>
   <a href="/auth/login">Or sign in</a>

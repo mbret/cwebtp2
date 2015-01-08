@@ -15,13 +15,13 @@ import miage.model.Message;
 import miage.model.ModelFactory;
 import miage.model.User;
 import miage.util.DatabaseInitializerListener;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Actions;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.Result;
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.convention.annotation.*;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +32,13 @@ import java.util.stream.Collectors;
  * Created by Maxime on 12/31/2014.
  */
 @Namespace("/messages/add")
+@InterceptorRef(
+        value = "authStack",
+        params = {
+                "fileUpload.allowedTypes", "text/plain",
+                "fileUpload.maximumSize", "210240" // ~200kb
+        }
+)
 public class AddAction extends AbstractAction implements ModelDriven<MessageBean>, AuthenticatedUserAware, SessionAware{
 
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(DatabaseInitializerListener.class);
@@ -65,6 +72,7 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
     private MessageDAO messageDAO = new MessageDAO();
     private UserDAO userDAO = new UserDAO();
     private Map<Long, String> destinatorList = new HashMap();
+
 
     public AddAction() throws Exception {
         // Fill select
@@ -100,6 +108,7 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
      * @throws Exception
      *
      */
+
     @Action(
             value = "send",
             results = {
@@ -112,6 +121,7 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
     )
     public String execute() throws Exception{
 
+
         try {
             Message message = ModelFactory.create(Message.class, this.messageBean);
 
@@ -119,6 +129,18 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
             message.setFrom( this.authenticatedUser );
 
             messageDAO.save( message );
+
+            // Copy attached piece
+            // @todo this part works but is deactivated because I don't really now where to put the file for now ...
+            String destPath = "C:/";
+            if( ! this.messageBean.getFileUploadFileName().isEmpty() ){
+//                try{
+//                    File destFile  = new File(destPath, this.messageBean.getFileUploadFileName());
+//                    FileUtils.copyFile( this.messageBean.getFileUpload(), destFile);
+//                }catch(IOException e){
+//                    throw new Exception(e);
+//                }
+            }
 
             return SUCCESS;
 

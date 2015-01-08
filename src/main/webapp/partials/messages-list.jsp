@@ -14,7 +14,7 @@
 <ul>
   <s:iterator value="messagesSent">
     <li>
-      Message: from: <s:property value="from"/>, to: <s:property value="to"/>, subject: <s:property value="object"/>, content: <s:property value="content"/>
+      Message: from: <s:property value="from"/>, to: <s:property value="to"/>, subject: <s:property value="object"/>, content: <s:property value="content"/>, file: <s:property value="file"/>
     </li>
   </s:iterator>
 </ul>

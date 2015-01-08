@@ -27,7 +27,7 @@
   </div>
 </s:if>
 
-<div id="enveloppe">
+<div id="enveloppe" >
   <s:form method="post" action="validateLogin" cssClass="form-signin">
     <h2 class="form-signin-heading">Please sign in</h2>
     <s:textfield name="email" cssClass="input form-control" label="email"/>

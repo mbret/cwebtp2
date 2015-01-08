@@ -1,5 +1,7 @@
 package miage.model;
 
+import miage.bean.UserBean;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -31,5 +33,11 @@ public class Company extends User{
 
     public void setCorporateName(String corporateName) {
         this.corporateName = corporateName;
+    }
+
+    @Override
+    public void loadFromBean(UserBean bean) {
+        super.loadFromBean(bean);
+        this.corporateName = bean.getCorporateName();
     }
 }
