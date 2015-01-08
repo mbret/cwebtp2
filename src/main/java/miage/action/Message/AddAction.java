@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 )
 public class AddAction extends AbstractAction implements ModelDriven<MessageBean>, AuthenticatedUserAware, SessionAware{
 
-    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(DatabaseInitializerListener.class);
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(AddAction.class);
 
     // For ModelDriven
     private MessageBean messageBean = new MessageBean();
