@@ -7,11 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
 
 <h1>List of message for user: <s:property value="user.email"/></h1>
 
@@ -19,7 +14,7 @@
 <ul>
   <s:iterator value="messagesSent">
     <li>
-      Message: from: <s:property value="from"/>, to: <s:property value="to"/>, subject: <s:property value="object"/>, content: <s:property value="content"/>
+      Message: from: <s:property value="from"/>, to: <s:property value="to"/>, subject: <s:property value="object"/>, content: <s:property value="content"/>, file: <s:property value="file"/>
     </li>
   </s:iterator>
 </ul>
@@ -34,5 +29,3 @@
 </ul>
 
 
-</body>
-</html>

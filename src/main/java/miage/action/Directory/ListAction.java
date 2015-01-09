@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Maxime on 12/31/2014.
  */
 @Namespace("/directories")
-@Result(name="success", location="/WEB-INF/pages/directories.jsp")
+@Result(name="success", location="/directories.tiles", type = "tiles")
 public class ListAction extends Abstract{
 
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ListAction.class);

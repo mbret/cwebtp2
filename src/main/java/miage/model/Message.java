@@ -34,6 +34,9 @@ public class Message extends Abstract<MessageBean> implements Serializable {
     @JoinColumn(name = "from_user", nullable = false)
     private User from;
 
+    @Column(name = "file")
+    private String file;
+
     public Message() {
     }
 
@@ -84,6 +87,14 @@ public class Message extends Abstract<MessageBean> implements Serializable {
         this.from = from;
     }
 
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
     @Override
     public void loadFromBean(MessageBean bean) throws Exception {
         this.object = bean.getObject();
@@ -94,5 +105,6 @@ public class Message extends Abstract<MessageBean> implements Serializable {
         if( bean.getFrom() instanceof UserBean ){
             this.from = ModelFactory.create(User.class, bean.getFrom());
         }
+        this.file = bean.getFileUploadFileName();
     }
 }

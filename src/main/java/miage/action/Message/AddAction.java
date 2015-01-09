@@ -2,39 +2,38 @@ package miage.action.Message;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
-import miage.action.Abstract;
-import miage.bean.AuthUserBean;
-import miage.bean.BeanFactory;
 import miage.bean.MessageBean;
-import miage.bean.UserBean;
-import miage.dao.AuthDAO;
 import miage.dao.MessageDAO;
 import miage.dao.UserDAO;
 import miage.interceptor.AuthenticatedUserAware;
 import miage.model.Message;
 import miage.model.ModelFactory;
 import miage.model.User;
-import miage.util.DatabaseInitializerListener;
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Actions;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by Maxime on 12/31/2014.
  */
 @Namespace("/messages/add")
+@InterceptorRef(
+        value = "authStack",
+        params = {
+                "fileUpload.allowedTypes", "text/plain",
+                "fileUpload.maximumSize", "210240" // ~200kb
+        }
+)
 public class AddAction extends AbstractAction implements ModelDriven<MessageBean>, AuthenticatedUserAware, SessionAware{
 
-    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(DatabaseInitializerListener.class);
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(AddAction.class);
 
     // For ModelDriven
     private MessageBean messageBean = new MessageBean();
@@ -66,6 +65,7 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
     private UserDAO userDAO = new UserDAO();
     private Map<Long, String> destinatorList = new HashMap();
 
+
     public AddAction() throws Exception {
         // Fill select
         // We fill select here because we need it in the two actions
@@ -83,7 +83,7 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
     @Action(
             value="form",
             results = {
-                    @Result(name="none", location="/WEB-INF/pages/messages-add.jsp"),
+                    @Result(name="none", location="/messages-add.tiles", type="tiles"),
                     @Result(name="error", type = "redirectAction", params = {
                             "namespace", "/", "actionName", "home"
                     })
@@ -100,17 +100,19 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
      * @throws Exception
      *
      */
+
     @Action(
             value = "send",
             results = {
-                    @Result(name="error", location="/WEB-INF/pages/messages-add.jsp"),
-                    @Result(name="input", location="/WEB-INF/pages/messages-add.jsp"),
+                    @Result(name="error", location="/messages-add.tiles", type="tiles"),
+                    @Result(name="input", location="/messages-add.tiles", type="tiles"),
                     @Result(name="success", type = "redirectAction", params = {
                             "namespace", "/", "actionName", "home", "message", ""
                     })
             }
     )
     public String execute() throws Exception{
+
 
         try {
             Message message = ModelFactory.create(Message.class, this.messageBean);
@@ -119,6 +121,18 @@ public class AddAction extends AbstractAction implements ModelDriven<MessageBean
             message.setFrom( this.authenticatedUser );
 
             messageDAO.save( message );
+
+            // Copy attached piece
+            // @todo this part works but is deactivated because I don't really now where to put the file for now ...
+            String destPath = "C:/";
+            if( ! this.messageBean.getFileUploadFileName().isEmpty() ){
+//                try{
+//                    File destFile  = new File(destPath, this.messageBean.getFileUploadFileName());
+//                    FileUtils.copyFile( this.messageBean.getFileUpload(), destFile);
+//                }catch(IOException e){
+//                    throw new Exception(e);
+//                }
+            }
 
             return SUCCESS;
 

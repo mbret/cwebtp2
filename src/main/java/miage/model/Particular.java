@@ -1,5 +1,7 @@
 package miage.model;
 
+import miage.bean.UserBean;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -54,5 +56,13 @@ public class Particular extends User{
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    @Override
+    public void loadFromBean(UserBean bean) {
+        super.loadFromBean(bean);
+        this.firstname = bean.getFirstName();
+        this.name = bean.getLastName();
+        this.birthday = bean.getBirthday();
     }
 }

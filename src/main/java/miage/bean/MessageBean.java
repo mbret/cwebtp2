@@ -8,6 +8,7 @@ import miage.model.User;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.io.File;
 
 /**
  * Created by Maxime on 12/31/2014.
@@ -24,12 +25,20 @@ public class MessageBean extends Abstract<Message> {
 
     private String destinator;
 
+    private String file;
+
+    // File upload
+    private File fileUpload;
+    private String fileUploadContentType;
+    private String fileUploadFileName;
+
     @Override
     public void loadFromModel(Message model) throws Exception {
         this.object = model.getObject();
         this.content = model.getContent();
         this.to = BeanFactory.create( UserBean.class, model.getTo());
         this.from = BeanFactory.create( UserBean.class, model.getFrom() );
+        this.file = model.getFile();
     }
 
     @RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "object", message="Supply object")
@@ -50,7 +59,6 @@ public class MessageBean extends Abstract<Message> {
         this.content = content;
     }
 
-
     public UserBean getTo() {
         return to;
     }
@@ -69,6 +77,38 @@ public class MessageBean extends Abstract<Message> {
 
     public String getDestinator() {
         return destinator;
+    }
+
+    public File getFileUpload() {
+        return fileUpload;
+    }
+
+    public void setFileUpload(File fileUpload) {
+        this.fileUpload = fileUpload;
+    }
+
+    public String getFileUploadContentType() {
+        return fileUploadContentType;
+    }
+
+    public void setFileUploadContentType(String fileUploadContentType) {
+        this.fileUploadContentType = fileUploadContentType;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public String getFileUploadFileName() {
+        return fileUploadFileName;
+    }
+
+    public void setFileUploadFileName(String fileUploadFileName) {
+        this.fileUploadFileName = fileUploadFileName;
     }
 
     @RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "to", message="Choose a destinator")

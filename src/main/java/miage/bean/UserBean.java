@@ -1,10 +1,13 @@
 package miage.bean;
 
 import com.opensymphony.xwork2.validator.annotations.*;
+import miage.model.Company;
 import miage.model.ModelInterface;
+import miage.model.Particular;
 import miage.model.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,18 +16,27 @@ import java.util.List;
 @Validations
 public class UserBean extends Abstract<User>{
 
+    // User
+    // Fields with validations
     private Long id;
     private String password;
     private String email;
 
+    // These fields below are not validated by bean, they are handled by action
+    // company
+    private String corporateName;
+
+    // particular
+    private String firstName;
+    private String lastName;
+    private Date birthday;
+
+    // proxy for radio (particular/company)
+    // can take value "Company" or "Particular"
+    private String type = "None";
+
     public UserBean() {
 
-    }
-
-    public UserBean(Long id, String password, String email) {
-        this.id = id;
-        this.password = password;
-        this.email = email;
     }
 
     public Long getId() {
@@ -40,7 +52,7 @@ public class UserBean extends Abstract<User>{
      * @return
      */
     @RequiredStringValidator(type = ValidatorType.SIMPLE, fieldName = "password", message="Supply password")
-    @RegexFieldValidator( regexExpression = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$", message = "Password invalid")
+//    @RegexFieldValidator( regexExpression = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$", message = "Password invalid")
     public String getPassword() {
         return password;
     }
@@ -59,6 +71,46 @@ public class UserBean extends Abstract<User>{
         this.email = email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCorporateName() {
+        return corporateName;
+    }
+
+    public void setCorporateName(String corporateName) {
+        this.corporateName = corporateName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -73,5 +125,13 @@ public class UserBean extends Abstract<User>{
         this.id = model.getId();
         this.password = model.getPassword();
         this.email = model.getEmail();
+        if( model instanceof Company ){
+            this.corporateName = ((Company) model).getCorporateName();
+        }
+        if( model instanceof Particular ){
+            this.firstName = ((Particular) model).getFirstname();
+            this.lastName = ((Particular) model).getName();
+            this.birthday = ((Particular) model).getBirthday();
+        }
     }
 }

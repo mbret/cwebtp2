@@ -5,27 +5,35 @@
 --%>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<html>
-<head>
-  <title>Login</title>
-</head>
-  <body>
 
-    <s:if test="hasErrors()">
-      <div id="message_erreur"/>
-        <s:fielderror />
-        <s:actionerror/>
-      </div>
-    </s:if>
+<%--<form class="form-signin">--%>
+  <%--<h2 class="form-signin-heading">Please sign in</h2>--%>
+  <%--<label for="inputEmail" class="sr-only">Email address</label>--%>
+  <%--<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">--%>
+  <%--<label for="inputPassword" class="sr-only">Password</label>--%>
+  <%--<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">--%>
+  <%--<div class="checkbox">--%>
+    <%--<label>--%>
+      <%--<input type="checkbox" value="remember-me"> Remember me--%>
+    <%--</label>--%>
+  <%--</div>--%>
+  <%--<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>--%>
+<%--</form>--%>
 
-    <div id="enveloppe">
-      <h3>Login</h3>
-      <s:form method="post" action="validateLogin">
-        <s:textfield name="email" cssClass="input" label="email"/>
-        <s:password name="password" cssClass="input" label="Password"/>
-        <s:submit value="Login"/>
-      </s:form>
-    </div>
+<s:if test="hasErrors()">
+  <div id="message_erreur"/>
+    <s:fielderror />
+    <s:actionerror/>
+  </div>
+</s:if>
 
-  </body>
-</html>
+<div id="enveloppe" >
+  <s:form method="post" action="validateLogin" cssClass="form-signin">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <s:textfield name="email" cssClass="input form-control" label="email"/>
+    <s:password name="password" cssClass="input form-control" label="Password"/>
+    <s:submit value="Login" cssClass="btn btn-lg btn-primary btn-block"/>
+  </s:form>
+  <a href="/signup">Or sign up</a>
+</div>
+
