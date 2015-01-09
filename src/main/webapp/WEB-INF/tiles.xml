@@ -17,4 +17,5 @@
         <put-attribute name="body"   value="/partials/index.jsp"/>
     </definition>
 
+    
 </tiles-definitions>

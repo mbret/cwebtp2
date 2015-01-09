@@ -1,10 +1,22 @@
 # Application
 
-## web.xml
-The web.xml configuration file is a J2EE configuration file that determines how elements of the HTTP request are processed by the servlet container.
-It is not strictly a Struts2 configuration file, but it is a file that needs to be configured for Struts2 to work.
+## Installation
+To install the application you need to get the lib folder at ...
+Then you need to configure your IDE for your needs. The app use Tomcat but you can use any servlet container you want.
+Here is some pictures about our IntelliJ configuration ...
+
+## Some information
+
+### View and Layout (jsp)
+The views (jsp) are handled with Tiles framework. The framewwork is used with Struts thanks to the tiles plugin for struts.
+The tiles configuration is located to WEB-INF/tiles.xml.
+Here are some resources useful to understand:
+- Struts plugin: https://cwiki.apache.org/confluence/display/WW/Tiles+3+Plugin
+- Tutorial: http://www.tutorialspoint.com/struts_2/struts_tiles.htm
+
+### Struts convention
+We use as much as possible the convention plugin. It means that the web.xml contains not many information. Please refer to the documentation
+to understand the functionnement.
 
 # TODO
-- Find a way to share constant var (for example to store the jsp path and use it in action)
-- Implement a layout system for jsp (tiles, ...)
-- Implement the structure of action /users/detail/{id} /users/detail/{id}/messages with url in jsp
+- ...
